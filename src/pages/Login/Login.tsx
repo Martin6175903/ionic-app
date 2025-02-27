@@ -7,7 +7,7 @@ import {
   IonInput,
   IonPage,
   IonTitle,
-  IonToolbar
+  IonToolbar, useIonRouter
 } from "@ionic/react";
 import { logInOutline, personCircleOutline } from "ionicons/icons";
 import LogoXBox from "../../assets/logo-xbox-svgrepo-com.svg";
@@ -15,9 +15,12 @@ import {FormEvent} from "react";
 
 const Login = () => {
 
+  const router = useIonRouter();
+
   const handleLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log('Login')
+    // router.push('/home', 'root');
   }
 
   return (
