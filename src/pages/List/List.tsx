@@ -1,6 +1,16 @@
 import {IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar} from "@ionic/react";
+import {useState} from "react";
 
 const List = () => {
+
+  const [users, setUsers] = useState<any[]>([])
+
+  const getUsers = async () => {
+    const data = await fetch('https://randomuser.me/api?results=10');
+    const users = await data.json();
+    setUsers(users)
+  }
+
   return (
     <IonPage>
       <IonHeader>
