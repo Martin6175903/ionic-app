@@ -57,7 +57,7 @@ const Login = () => {
         <IonPage>
           <IonHeader>
             <IonToolbar color={'success'}>
-              <IonTitle color={'primary'}>Login</IonTitle>
+              <IonTitle className={'ion-text-center'} color={'light'}>Login</IonTitle>
             </IonToolbar>
           </IonHeader>
           <IonContent scrollY={false} className={'ion-padding'}>
