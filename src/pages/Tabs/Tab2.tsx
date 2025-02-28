@@ -1,6 +1,6 @@
 import {IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar} from "@ionic/react";
 
-const Tab1 = () => {
+const Tab2 = () => {
   return (
     <IonPage>
       <IonHeader>
@@ -8,7 +8,7 @@ const Tab1 = () => {
           <IonButtons slot={'start'}>
             <IonMenuButton/>
           </IonButtons>
-          <IonTitle>Tab 1</IonTitle>
+          <IonTitle>Tab 2</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className={'ion-padding'}>
@@ -18,4 +18,4 @@ const Tab1 = () => {
   );
 };
 
-export default Tab1;
+export default Tab2;

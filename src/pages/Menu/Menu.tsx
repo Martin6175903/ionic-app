@@ -1,4 +1,5 @@
 import {
+  IonButton,
   IonContent,
   IonHeader, IonIcon,
   IonItem,
@@ -13,7 +14,7 @@ import {Route} from "react-router-dom";
 import List from "@/pages/List/List";
 import Settings from "@/pages/Settings/Settings";
 import {Redirect} from "react-router";
-import {homeOutline, newspaperOutline} from "ionicons/icons";
+import {homeOutline, logOutOutline, newspaperOutline} from "ionicons/icons";
 
 const Menu = () => {
 
@@ -40,6 +41,12 @@ const Menu = () => {
                 </IonItem>
               </IonMenuToggle>
             ))}
+            <IonMenuToggle autoHide={false}>
+              <IonButton expand={'full'} routerDirection={'root'} routerLink={'/'}>
+                <IonIcon slot={'start'} icon={logOutOutline}/>
+                Logout
+              </IonButton>
+            </IonMenuToggle>
           </IonContent>
         </IonMenu>
 
