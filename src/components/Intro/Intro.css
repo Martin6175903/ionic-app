@@ -14,3 +14,9 @@
   height: 40vh;
   margin-bottom: 40px;
 }
+
+.button-prev, .button-next, .button-finish {
+  padding: 3px 14px;
+  border: 2px solid darkturquoise;
+  border-radius: 8px;
+}

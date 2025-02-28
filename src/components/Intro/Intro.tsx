@@ -1,19 +1,20 @@
 import {FC} from "react";
-import {Swiper, SwiperSlide, useSwiper} from "swiper/react";
+import {Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
 import {IonButton, IonButtons, IonContent, IonPage, IonText} from "@ionic/react";
 import IntroIllustration1 from "@assets/intro/presentation-svgrepo-com.svg";
 import IntroIllustration2 from "@assets/intro/presentation-svgrepo-com (1).svg";
 import IntroIllustration3 from "@assets/intro/presentation-svgrepo-com (2).svg";
 import "./Intro.css";
+import SwiperButtonNext from "@/components/Intro/Swiper/SwiperButtonNext";
+import SwiperButtonPrev from "@/components/Intro/Swiper/SwiperButtonPrev";
+import SwiperButtonsContainer from "@/components/Intro/Swiper/SwiperButtonsContainer";
 
 interface ContainerProps {
   onFinish: () => void
 }
 
 const Intro: FC<ContainerProps> = ({onFinish}) => {
-
-  const swiper = useSwiper();
 
   return (
     <IonPage>
@@ -25,8 +26,9 @@ const Intro: FC<ContainerProps> = ({onFinish}) => {
               <h3>Advantage 1 our Application</h3>
             </IonText>
             <IonButtons>
-              <IonButton onClick={() => swiper.slidePrev()}>Prev</IonButton>
-              <IonButton onClick={() => swiper.slideNext()}>Next</IonButton>
+              <SwiperButtonsContainer>
+                <SwiperButtonNext>Next</SwiperButtonNext>
+              </SwiperButtonsContainer>
             </IonButtons>
           </SwiperSlide>
           <SwiperSlide>
@@ -35,8 +37,10 @@ const Intro: FC<ContainerProps> = ({onFinish}) => {
               <h3>Advantage 2 our Application</h3>
             </IonText>
             <IonButtons>
-              <IonButton onClick={() => swiper.slidePrev()}>Prev</IonButton>
-              <IonButton onClick={() => swiper.slideNext()}>Next</IonButton>
+              <SwiperButtonsContainer>
+                <SwiperButtonPrev>Prev</SwiperButtonPrev>
+                <SwiperButtonNext>Next</SwiperButtonNext>
+              </SwiperButtonsContainer>
             </IonButtons>
           </SwiperSlide>
           <SwiperSlide>
@@ -44,7 +48,12 @@ const Intro: FC<ContainerProps> = ({onFinish}) => {
             <IonText>
               <h3>Advantage 3 our Application</h3>
             </IonText>
-            <IonButton onClick={onFinish}>Finish Intro</IonButton>
+            <IonButtons>
+              <SwiperButtonsContainer>
+                <SwiperButtonPrev>Prev</SwiperButtonPrev>
+                <IonButton style={{border: "2px solid #6030ff"}} className={'button-finish'} color={'tertiary'} onClick={onFinish}>Finish Intro</IonButton>
+              </SwiperButtonsContainer>
+            </IonButtons>
           </SwiperSlide>
         </Swiper>
       </IonContent>

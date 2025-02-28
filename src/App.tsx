@@ -33,6 +33,7 @@ import './theme/variables.css';
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Home from "./pages/Home";
+import Menu from "@/pages/Menu/Menu";
 
 setupIonicReact();
 
@@ -42,6 +43,7 @@ const App = () => (
       <IonRouterOutlet>
         <Route exact path="/" component={Login}/>
         <Route exact path="/register" component={Register}/>
+        <Route exact path={"/app"} component={Menu}/>
         <Route exact path="/home" component={Home}/>
       </IonRouterOutlet>
     </IonReactRouter>
