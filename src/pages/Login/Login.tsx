@@ -25,9 +25,14 @@ const Login = () => {
     // router.push('/home', 'root');
   }
 
+  const onFinish = () => {
+    console.log("Finish Intro")
+    setIntroSeen(true);
+  }
+
   return (
     <>
-      {!introSeen ? <Intro/> : (
+      {!introSeen ? <Intro onFinish={onFinish}/> : (
         <IonPage>
           <IonHeader>
             <IonToolbar color={'success'}>
