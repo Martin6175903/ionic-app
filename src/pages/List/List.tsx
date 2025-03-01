@@ -4,13 +4,13 @@ import {
   IonButtons, IonCard, IonCardContent, IonChip,
   IonContent,
   IonHeader, IonIcon, IonImg, IonItem, IonLabel,
-  IonMenuButton,
+  IonMenuButton, IonModal,
   IonPage, IonRefresher, IonRefresherContent, IonSearchbar, IonSkeletonText,
   IonTitle,
   IonToolbar, useIonAlert, useIonToast,
   useIonViewWillEnter
 } from "@ionic/react";
-import {useState} from "react";
+import {useRef, useState} from "react";
 import {trashBinOutline} from "ionicons/icons";
 
 const List = () => {
@@ -19,6 +19,8 @@ const List = () => {
   const [users, setUsers] = useState<any[]>([])
   const [showAlert] = useIonAlert();
   const [showToast] = useIonToast();
+  const [selectedUser, setSelectedUser] = useState<any>(null)
+  const modal = useRef<HTMLIonModalElement>(null);
 
   useIonViewWillEnter(async () => {
     const users = await getUsers()
@@ -108,7 +110,7 @@ const List = () => {
           )
           : (
           users.map((user,index) => (
-            <IonCard key={index}>
+            <IonCard key={index} onClick={() => setSelectedUser(user)}>
               {/*<IonCardHeader>*/}
               {/*  <IonCardTitle>Test</IonCardTitle>*/}
               {/*</IonCardHeader>*/}
@@ -129,6 +131,20 @@ const List = () => {
             </IonCard>
           )
         ))}
+
+        <IonModal ref={modal} isOpen={selectedUser !== null} onIonModalDidDismiss={() => setSelectedUser(null)}>
+          <IonHeader>
+            <IonToolbar>
+              <IonButtons slot={'start'}>
+                <IonButton onClick={() => modal.current?.dismiss()}>Close</IonButton>
+              </IonButtons>
+              <IonTitle>User</IonTitle>
+            </IonToolbar>
+          </IonHeader>
+          <IonContent>
+            SHEET
+          </IonContent>
+        </IonModal>
       </IonContent>
     </IonPage>
   );
