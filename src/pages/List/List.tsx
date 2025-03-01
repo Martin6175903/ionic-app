@@ -1,13 +1,13 @@
 import {
   IonAvatar,
   IonButton,
-  IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonChip,
+  IonButtons, IonCard, IonCardContent, IonChip,
   IonContent,
   IonHeader, IonIcon, IonImg, IonItem, IonLabel,
   IonMenuButton,
-  IonPage, IonRefresher, IonRefresherContent, IonSearchbar,
+  IonPage, IonRefresher, IonRefresherContent, IonSearchbar, IonSkeletonText,
   IonTitle,
-  IonToolbar, RefresherEventDetail, useIonAlert, useIonToast,
+  IonToolbar, useIonAlert, useIonToast,
   useIonViewWillEnter
 } from "@ionic/react";
 import {useState} from "react";
@@ -23,7 +23,6 @@ const List = () => {
   useIonViewWillEnter(async () => {
     const users = await getUsers()
     setUsers(users);
-    console.log(users)
     setLoading(false);
   })
 
@@ -84,7 +83,30 @@ const List = () => {
           <IonRefresherContent/>
         </IonRefresher>
 
-        {loading ? <h1>Loading...</h1> : (
+        {loading
+          ? (
+            [...Array(10).map((_, index) => (
+              <IonCard key={index}>
+                <IonCardContent className={'ion-no-padding'}>
+                  <IonItem>
+                    <IonAvatar slot={'start'}>
+                      <IonSkeletonText/>
+                    </IonAvatar>
+                    <IonLabel>
+                      <IonSkeletonText animated style={{ width: '150px' }}/>
+                      <p>
+                        <IonSkeletonText/>
+                      </p>
+                    </IonLabel>
+                    <IonChip slot={'end'} color={'primary'}>
+
+                    </IonChip>
+                  </IonItem>
+                </IonCardContent>
+              </IonCard>
+            ))]
+          )
+          : (
           users.map((user,index) => (
             <IonCard key={index}>
               {/*<IonCardHeader>*/}
