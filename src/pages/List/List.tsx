@@ -5,9 +5,9 @@ import {
   IonContent,
   IonHeader, IonIcon, IonImg, IonItem, IonLabel,
   IonMenuButton,
-  IonPage, IonSearchbar,
+  IonPage, IonRefresher, IonRefresherContent, IonSearchbar,
   IonTitle,
-  IonToolbar, useIonAlert,
+  IonToolbar, RefresherEventDetail, useIonAlert, useIonToast,
   useIonViewWillEnter
 } from "@ionic/react";
 import {useState} from "react";
@@ -18,6 +18,7 @@ const List = () => {
   const [loading, setLoading] = useState(true)
   const [users, setUsers] = useState<any[]>([])
   const [showAlert] = useIonAlert();
+  const [showToast] = useIonToast();
 
   useIonViewWillEnter(async () => {
     const users = await getUsers()
@@ -33,7 +34,30 @@ const List = () => {
   }
 
   const clearList = () => {
+    showAlert({
+      header: 'Confirm!',
+      message: 'Are you sure you want to delete all users?',
+      buttons: [
+        { text: 'Cancel', role: 'cancel' },
+        {
+          text: 'Delete',
+          handler() {
+            setUsers([])
+            showToast({
+              message: 'All users deleted',
+              duration: 2000,
+              color: 'danger'
+            })
+          }
+        }
+      ]
+    })
+  }
 
+  const doRefresh = async (event:  any) => {
+    const data = await getUsers();
+    setUsers(data);
+    event.detail.complete();
   }
 
   return (
@@ -55,6 +79,11 @@ const List = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
+
+        <IonRefresher slot={'fixed'} onIonRefresh={(ev) => doRefresh(ev)}>
+          <IonRefresherContent/>
+        </IonRefresher>
+
         {loading ? <h1>Loading...</h1> : (
           users.map((user,index) => (
             <IonCard key={index}>
