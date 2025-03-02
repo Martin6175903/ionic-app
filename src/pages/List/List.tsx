@@ -2,16 +2,16 @@ import {
   IonAvatar,
   IonButton,
   IonButtons, IonCard, IonCardContent, IonChip,
-  IonContent,
+  IonContent, IonFab, IonFabButton,
   IonHeader, IonIcon, IonImg, IonItem, IonLabel,
   IonMenuButton, IonModal,
-  IonPage, IonRefresher, IonRefresherContent, IonSearchbar, IonSkeletonText,
+  IonPage, IonRefresher, IonRefresherContent, IonSearchbar, IonSkeletonText, IonText,
   IonTitle,
   IonToolbar, useIonAlert, useIonToast,
   useIonViewWillEnter
 } from "@ionic/react";
 import {useRef, useState} from "react";
-import {trashBinOutline} from "ionicons/icons";
+import {addOutline, trashBinOutline} from "ionicons/icons";
 
 const List = () => {
 
@@ -21,6 +21,8 @@ const List = () => {
   const [showToast] = useIonToast();
   const [selectedUser, setSelectedUser] = useState<any>(null)
   const modal = useRef<HTMLIonModalElement>(null);
+  const cardModal = useRef<HTMLIonModalElement>(null);
+  const [presentingElement, setPresentingElement] = useState<HTMLElement | null>(null)
 
   useIonViewWillEnter(async () => {
     const users = await getUsers()
@@ -132,19 +134,39 @@ const List = () => {
           )
         ))}
 
-        <IonModal ref={modal} isOpen={selectedUser !== null} onIonModalDidDismiss={() => setSelectedUser(null)}>
+        <IonModal breakpoints={[0, 0.5, 0.8]} initialBreakpoint={0.5} ref={modal} isOpen={selectedUser !== null} onIonModalDidDismiss={() => setSelectedUser(null)}>
           <IonHeader>
             <IonToolbar>
               <IonButtons slot={'start'}>
                 <IonButton onClick={() => modal.current?.dismiss()}>Close</IonButton>
               </IonButtons>
-              <IonTitle>User</IonTitle>
+              <IonTitle>{selectedUser?.name.first} {selectedUser?.name.last}</IonTitle>
             </IonToolbar>
           </IonHeader>
           <IonContent>
-            SHEET
+            Anything Data
           </IonContent>
         </IonModal>
+
+        <IonModal ref={cardModal} trigger={'card-modal'}>
+          <IonHeader>
+            <IonToolbar>
+              <IonButtons slot={'start'}>
+                <IonButton onClick={() => cardModal.current?.dismiss()}>Close</IonButton>
+              </IonButtons>
+              <IonTitle>Card Modal</IonTitle>
+            </IonToolbar>
+          </IonHeader>
+          <IonContent>
+            <p>My card Modal</p>
+          </IonContent>
+        </IonModal>
+
+        <IonFab vertical={'bottom'} horizontal={'end'} slot={'fixed'}>
+          <IonFabButton id={'card-modal'}>
+            <IonIcon icon={addOutline}/>
+          </IonFabButton>
+        </IonFab>
       </IonContent>
     </IonPage>
   );
