@@ -5,12 +5,12 @@ import {
   IonContent, IonFab, IonFabButton,
   IonHeader, IonIcon, IonImg, IonItem, IonLabel,
   IonMenuButton, IonModal,
-  IonPage, IonRefresher, IonRefresherContent, IonSearchbar, IonSkeletonText, IonText,
+  IonPage, IonRefresher, IonRefresherContent, IonSearchbar, IonSegment, IonSegmentButton, IonSkeletonText, IonText,
   IonTitle,
   IonToolbar, useIonAlert, useIonToast,
   useIonViewWillEnter
 } from "@ionic/react";
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {addOutline, trashBinOutline} from "ionicons/icons";
 
 const List = () => {
@@ -22,7 +22,14 @@ const List = () => {
   const [selectedUser, setSelectedUser] = useState<any>(null)
   const modal = useRef<HTMLIonModalElement>(null);
   const cardModal = useRef<HTMLIonModalElement>(null);
-  const [presentingElement, setPresentingElement] = useState<HTMLElement | null>(null)
+  const [presentingElement, setPresentingElement] = useState<HTMLElement | null>(null);
+  const page = useRef(null);
+
+  const [activeSegment, setActiveSegment] = useState('details');
+
+  useEffect(() => {
+    setPresentingElement(page.current)
+  }, []);
 
   useIonViewWillEnter(async () => {
     const users = await getUsers()
@@ -64,7 +71,7 @@ const List = () => {
   }
 
   return (
-    <IonPage>
+    <IonPage ref={page}>
       <IonHeader>
         <IonToolbar color={'secondary'}>
           <IonButtons slot={'start'}>
@@ -136,19 +143,25 @@ const List = () => {
 
         <IonModal breakpoints={[0, 0.5, 0.8]} initialBreakpoint={0.5} ref={modal} isOpen={selectedUser !== null} onIonModalDidDismiss={() => setSelectedUser(null)}>
           <IonHeader>
-            <IonToolbar>
+            <IonToolbar color={'light'}>
               <IonButtons slot={'start'}>
                 <IonButton onClick={() => modal.current?.dismiss()}>Close</IonButton>
               </IonButtons>
               <IonTitle>{selectedUser?.name.first} {selectedUser?.name.last}</IonTitle>
             </IonToolbar>
+            <IonToolbar color={'light'}>
+              <IonSegment value={activeSegment} onIonChange={e => setActiveSegment(e.detail.value!)}>
+                <IonSegmentButton value={"details"}>Details</IonSegmentButton>
+                <IonSegmentButton value={"calendar"}>Calendar</IonSegmentButton>
+              </IonSegment>
+            </IonToolbar>
           </IonHeader>
-          <IonContent>
-            Anything Data
+          <IonContent className={'ion-padding'}>
+
           </IonContent>
         </IonModal>
 
-        <IonModal ref={cardModal} trigger={'card-modal'}>
+        <IonModal ref={cardModal} trigger={'card-modal'} presentingElement={presentingElement!}>
           <IonHeader>
             <IonToolbar>
               <IonButtons slot={'start'}>
