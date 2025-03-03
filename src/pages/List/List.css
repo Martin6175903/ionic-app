@@ -1,0 +1,4 @@
+ion-item::part(detail-icon) {
+  color: #ff00ff;
+  opacity: 1;
+}

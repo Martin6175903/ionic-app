@@ -74,8 +74,8 @@ const Login = () => {
                   <IonCard>
                     <IonCardContent>
                       <form onSubmit={handleLogin}>
-                        <IonInput fill={"outline"} labelPlacement={"floating"} label={"email"} type={"email"} placeholder={"martin5324@yandex.by"}/>
-                        <IonInput className={"ion-margin-top"} fill={"outline"} labelPlacement={"floating"} label={"Password"} type={"password"} placeholder={"Skiter2331"}/>
+                        <IonInput mode={'md'} fill={"outline"} labelPlacement={"floating"} label={"email"} type={"email"} placeholder={"martin5324@yandex.by"}/>
+                        <IonInput mode={'md'} className={"ion-margin-top"} fill={"outline"} labelPlacement={"floating"} label={"Password"} type={"password"} placeholder={"Skiter2331"}/>
                         <IonButton className={'ion-margin-top'} type={'submit'} expand={'block'}>
                           Login
                           <IonIcon icon={logInOutline} slot={'end'}/>

@@ -15,6 +15,7 @@ import List from "@/pages/List/List";
 import Settings from "@/pages/Settings/Settings";
 import {Redirect} from "react-router";
 import {homeOutline, logOutOutline, newspaperOutline} from "ionicons/icons";
+import '../List/List.css';
 
 const Menu = () => {
 
@@ -35,7 +36,7 @@ const Menu = () => {
           <IonContent>
             {paths.map((item, index) => (
               <IonMenuToggle autoHide={false} key={index}>
-                <IonItem routerDirection={'none'} routerLink={item.url}>
+                <IonItem detail={true} routerDirection={'none'} routerLink={item.url}>
                   <IonIcon slot={'start'} icon={item.icon}/>
                   {item.name}
                 </IonItem>

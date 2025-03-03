@@ -150,7 +150,7 @@ const List = () => {
               <IonTitle>{selectedUser?.name.first} {selectedUser?.name.last}</IonTitle>
             </IonToolbar>
             <IonToolbar color={'light'}>
-              <IonSegment value={activeSegment} onIonChange={e => setActiveSegment(e.detail.value!)}>
+              <IonSegment value={activeSegment} onIonChange={e => setActiveSegment(`${e.detail.value!}`)}>
                 <IonSegmentButton value={"details"}>Details</IonSegmentButton>
                 <IonSegmentButton value={"calendar"}>Calendar</IonSegmentButton>
               </IonSegment>
