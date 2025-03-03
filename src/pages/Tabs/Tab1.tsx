@@ -1,6 +1,14 @@
-import {IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar} from "@ionic/react";
+import {IonButton, IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar} from "@ionic/react";
+import {useState} from "react";
 
 const Tab1 = () => {
+
+  const [image, setImage] = useState<any>(null);
+
+  const takePicture = async() => {
+
+  }
+  
   return (
     <IonPage>
       <IonHeader>
@@ -8,11 +16,12 @@ const Tab1 = () => {
           <IonButtons slot={'start'}>
             <IonMenuButton/>
           </IonButtons>
-          <IonTitle>Tab 1</IonTitle>
+          <IonTitle>Image Example</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className={'ion-padding'}>
-        UI goes here...
+        <IonButton expand={'full'} onClick={takePicture}>Take Picture</IonButton>
+        <img src={image} alt={image}/>
       </IonContent>
     </IonPage>
   );

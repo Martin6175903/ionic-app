@@ -35,7 +35,10 @@ import Register from "./pages/Register/Register";
 import Home from "./pages/Home";
 import Menu from "@/pages/Menu/Menu";
 
-setupIonicReact();
+setupIonicReact({
+  // mode: 'ios',
+  // animated: false
+});
 
 const App = () => (
   <IonApp>
