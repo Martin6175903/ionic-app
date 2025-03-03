@@ -1,6 +1,23 @@
-import {IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar} from "@ionic/react";
+import {
+  CreateAnimation, IonButton,
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonMenuButton,
+  IonPage,
+  IonTitle,
+  IonToolbar, useIonViewDidEnter
+} from "@ionic/react";
+import {useRef} from "react";
 
 const Tab2 = () => {
+
+  const animationRef = useRef(null);
+
+  useIonViewDidEnter(() => {
+    // animationRef.current?.animation.play();
+  })
+
   return (
     <IonPage>
       <IonHeader>
@@ -12,7 +29,19 @@ const Tab2 = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className={'ion-padding'}>
-        UI goes here...
+        <CreateAnimation
+          ref={animationRef}
+          duration={2000}
+          iterations={Infinity}
+          delay={1000}
+          keyframes={[
+            {offset: 0, transform: 'scale(1)', opacity: '1'},
+            {offset: 0.5, transform: 'scale(1.5)', opacity: '0.5'},
+            {offset: 1, transform: 'scale(1)', opacity: '1'},
+          ]}
+        >
+          <IonButton expand={'block'} color={'success'} className={'ion-margin'}>Join Ionic Academy</IonButton>
+        </CreateAnimation>
       </IonContent>
     </IonPage>
   );

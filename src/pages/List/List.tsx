@@ -2,10 +2,10 @@ import {
   IonAvatar,
   IonButton,
   IonButtons, IonCard, IonCardContent, IonChip,
-  IonContent, IonFab, IonFabButton,
+  IonContent, IonDatetime, IonFab, IonFabButton,
   IonHeader, IonIcon, IonImg, IonItem, IonLabel,
   IonMenuButton, IonModal,
-  IonPage, IonRefresher, IonRefresherContent, IonSearchbar, IonSegment, IonSegmentButton, IonSkeletonText, IonText,
+  IonPage, IonRefresher, IonRefresherContent, IonSearchbar, IonSegment, IonSegmentButton, IonSkeletonText,
   IonTitle,
   IonToolbar, useIonAlert, useIonToast,
   useIonViewWillEnter
@@ -157,7 +157,22 @@ const List = () => {
             </IonToolbar>
           </IonHeader>
           <IonContent className={'ion-padding'}>
-
+            {activeSegment === 'details' && (
+              <IonCard>
+                <IonCardContent className={'ion-no-padding'}>
+                  <IonItem lines={'none'}>
+                    <IonAvatar slot={'start'}>
+                      <IonImg src={selectedUser?.picture.thumbnail}/>
+                    </IonAvatar>
+                    <IonLabel>
+                      {selectedUser?.name.first} {selectedUser?.name.last}
+                      <p>{selectedUser?.email}</p>
+                    </IonLabel>
+                  </IonItem>
+                </IonCardContent>
+              </IonCard>
+            )}
+            {activeSegment === 'calendar' && <IonDatetime/>}
           </IonContent>
         </IonModal>
 
