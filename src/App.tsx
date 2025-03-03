@@ -34,11 +34,13 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Home from "./pages/Home";
 import Menu from "@/pages/Menu/Menu";
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
 setupIonicReact({
   // mode: 'ios',
   // animated: false
 });
+defineCustomElements(window);
 
 const App = () => (
   <IonApp>

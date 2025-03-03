@@ -1,12 +1,20 @@
 import {IonButton, IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar} from "@ionic/react";
 import {useState} from "react";
+import {Camera, CameraResultType} from "@capacitor/camera";
 
 const Tab1 = () => {
 
   const [image, setImage] = useState<any>(null);
 
   const takePicture = async() => {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.Uri
+    })
 
+    const img = image.webPath;
+    setImage(img);
   }
   
   return (
